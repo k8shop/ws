@@ -150,7 +150,7 @@ type Dialer struct {
 // If you want to dial non-ascii host name, take care of its name serialization
 // avoiding bad request issues. For more info see net/http Request.Write()
 // implementation, especially cleanHost() function.
-func (d Dialer) Dial(ctx context.Context, urlstr string) (conn net.Conn, br *bufio.Reader, hs Handshake, err error) {
+func (d *Dialer) Dial(ctx context.Context, urlstr string) (conn net.Conn, br *bufio.Reader, hs Handshake, err error) {
 	u, err := url.ParseRequestURI(urlstr)
 	if err != nil {
 		return nil, nil, hs, err
@@ -223,7 +223,7 @@ func hostport(host, defaultPort string) (hostname, addr string) {
 	return host, host + defaultPort
 }
 
-func (d Dialer) dial(ctx context.Context, u *url.URL) (conn net.Conn, err error) {
+func (d *Dialer) dial(ctx context.Context, u *url.URL) (conn net.Conn, err error) {
 	dial := d.NetDial
 	if dial == nil {
 		dial = netEmptyDialer.DialContext
@@ -252,7 +252,7 @@ func (d Dialer) dial(ctx context.Context, u *url.URL) (conn net.Conn, err error)
 	return conn, err
 }
 
-func (d Dialer) tlsClient(conn net.Conn, hostname string) net.Conn {
+func (d *Dialer) tlsClient(conn net.Conn, hostname string) net.Conn {
 	config := d.TLSConfig
 	if config == nil {
 		config = tlsDefaultConfig()
@@ -282,7 +282,7 @@ var (
 //
 // It returns handshake info and some bytes which could be written by the peer
 // right after response and be caught by us during buffered read.
-func (d Dialer) Upgrade(conn io.ReadWriter, u *url.URL) (br *bufio.Reader, hs Handshake, err error) {
+func (d *Dialer) Upgrade(conn io.ReadWriter, u *url.URL) (br *bufio.Reader, hs Handshake, err error) {
 	// headerSeen constants helps to report whether or not some header was seen
 	// during reading request bytes.
 	const (
