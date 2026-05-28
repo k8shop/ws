@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/gobwas/ws"
+	"github.com/k8shop/ws"
 )
 
 func TestHelperWriteAndRead(t *testing.T) {

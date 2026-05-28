@@ -1,4 +1,4 @@
-module github.com/gobwas/ws
+module github.com/k8shop/ws
 
 go 1.16
 

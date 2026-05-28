@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	"github.com/gobwas/pool/pbytes"
-	"github.com/gobwas/ws"
+	"github.com/k8shop/ws"
 )
 
 // ClosedError returned when peer has closed the connection with appropriate

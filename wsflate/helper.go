@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/gobwas/ws"
+	"github.com/k8shop/ws"
 )
 
 // DefaultHelper is a default helper instance holding standard library's
